@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Resolution Links</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="script" href="script.js" />
+</head>
+<body>
+
+<div class="input-container">
+  <label for="urlInput">Enter the URL to process:</label>
+  <input type="text" id="urlInput" placeholder="e.g. https://example.com"/>
+  <button id="fetchBtn">Fetch & Display</button>
+</div>
+
+<table id="resultTable" style="display:none;">
+  <thead>
+    <tr>
+      <th>Resolution</th>
+      <th>Download Link</th>
+    </tr>
+  </thead>
+  <tbody id="resultBody"></tbody>
+</table>
+
+<script src="script.js"></script>
+
+</body>
+</html>
