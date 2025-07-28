@@ -1,31 +1,78 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <title>Resolution Links</title>
-    <link rel="stylesheet" href="style.css" />
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+
+  <title>PTDL: A Prehraj.to Downloader</title>
+  <meta name="description" content="PTDL lets you quickly grab download links from Prehraj.to / Prehrajto.cz" />
+  <meta name="theme-color" content="#0d1117" />
+
+  <link rel="icon" href="icons/logo.png" type="image/png" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="brand">
+      <img src="icons/logo.png" alt="PTDL Logo" class="logo" />
+      <h1>PTDL: <span class="accent">A Prehraj.to Downloader</span></h1>
+    </div>
+  </header>
 
-<div class="input-container">
-  <label for="urlInput">Enter the URL to process:</label>
-  <input type="text" id="urlInput" placeholder="e.g. https://example.com"/>
-  <button id="fetchBtn">Fetch & Display</button>
-</div>
+  <!-- Main Content -->
+  <main class="container">
+    <section class="card input-card" aria-labelledby="input-title">
+      <h2 id="input-title">Get Links</h2>
+      <form id="fetchForm" class="fetch-form" autocomplete="off">
+        <label for="urlInput" class="sr-only">Enter the Prehraj.to URL</label>
+        <input
+          type="url"
+          id="urlInput"
+          name="url"
+          placeholder="https://prehraj.to/..."
+          required
+          aria-required="true"
+        />
+        <button id="fetchBtn" type="submit" class="btn primary">Fetch &amp; Display</button>
+      </form>
+      <p class="hint">Paste a Prehraj.to / Prehrajto.cz URL and hit Enter or click the button.</p>
+    </section>
 
-<table id="resultTable" style="display:none;">
-  <thead>
-    <tr>
-      <th>Resolution</th>
-      <th>Download Link</th>
-    </tr>
-  </thead>
-  <tbody id="resultBody"></tbody>
-</table>
+    <section id="resultsSection" class="card results-card hidden" aria-labelledby="results-title">
+      <div class="results-header">
+        <h2 id="results-title">Available Downloads</h2>
+        <button id="copyJsonBtn" class="btn ghost" title="Copy raw JSON">Copy JSON</button>
+      </div>
 
-<script src="obfuscated.js"></script>
+      <div class="table-wrapper">
+        <table id="resultTable" role="table" aria-label="Download links">
+          <thead>
+            <tr>
+              <th scope="col">Resolution</th>
+              <th scope="col">Download Link</th>
+              <th scope="col" class="actions-col">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="resultBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
 
+  <!-- Toasts -->
+  <div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Loading overlay -->
+  <div id="loading" class="loading hidden" aria-hidden="true">
+    <div class="spinner"></div>
+  </div>
+
+  <footer class="app-footer">
+    <p>© <span id="year"></span> PTDL • Built by Lukas</p>
+  </footer>
+
+  <script src="obfuscated.js"></script>
 </body>
 </html>
