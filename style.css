@@ -136,6 +136,18 @@ input[type="url"]:focus, input[type="text"]:focus, input[type="password"]:focus 
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .results-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .results-header h2 {
+    width: 100%;
+  }
 }
 
 .table-wrapper {
@@ -392,4 +404,37 @@ tbody tr:hover { background: rgba(255,255,255,0.06); }
   color: var(--danger);
   font-size: 1.5rem;
   font-weight: 600;
+}
+
+
+/* ==========================================================
+   Responsive Input Group
+   ========================================================== */
+.input-group {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.input-group input {
+  width: 100%;
+  padding-right: 3.5rem; /* space for the absolute button */
+}
+
+.input-group .icon-btn {
+  position: absolute;
+  right: 0.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.5rem;
+  background: transparent;
+  color: var(--accent);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-group .icon-btn:hover {
+  background: var(--bg-1);
 }
