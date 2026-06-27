@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-
+  
   <title>PTDL: A Prehraj.to Downloader</title>
   <meta name="description" content="PTDL lets you quickly grab download links from Prehraj.to / Prehrajto.cz" />
   <meta name="theme-color" content="#0d1117" />
@@ -15,48 +14,68 @@
 <body>
   <!-- Header -->
   <header class="app-header">
-    <div class="brand">
-      <img src="logo.png" alt="PTDL Logo" class="logo" />
-      <h1>PTDL: <span class="accent">A Prehraj.to Downloader</span></h1>
+    <div class="brand" style="display:flex; justify-content:space-between; width:100%;">
+      <a href="/" style="text-decoration:none; color:inherit; display:flex; gap:0.75rem; align-items:center;">
+        <img src="logo.png" alt="PTDL Logo" class="logo" />
+        <h1>PTDL: <span class="accent">A Prehraj.to Downloader</span></h1>
+      </a>
+      <button id="openAuthBtn" class="btn ghost green">Login</button>
     </div>
   </header>
 
   <!-- Main Content -->
   <main class="container">
+    
+    
+    <!-- Token Auth Overlay -->
+    <div id="authOverlay" class="auth-overlay hidden">
+      <div class="auth-dialog card">
+        <h2>Enter Token</h2>
+        <p>A valid token is required to perform searches.</p>
+        <div class="fetch-form" style="margin-top: 1rem;">
+          <input type="password" id="tokenInput" placeholder="Enter your token..." style="flex:1; padding:0.75rem; border-radius:var(--radius); border:1px solid var(--bg-2); background:var(--bg-2); color:var(--fg-0);"/>
+          <button id="saveTokenBtn" class="btn primary">Save Token</button>
+        </div>
+      </div>
+    </div>
+
     <section class="card input-card" aria-labelledby="input-title">
-      <h2 id="input-title">Get Links</h2>
+      <h2 id="input-title">Get Links or Search</h2>
       <form id="fetchForm" class="fetch-form" autocomplete="off">
-        <label for="urlInput" class="sr-only">Enter the Prehraj.to URL</label>
+        <label for="urlInput" class="sr-only">Enter URL or Search Query</label>
         <input
-          type="url"
+          type="text"
           id="urlInput"
           name="url"
-          placeholder="https://prehraj.to/..."
+          placeholder="https://prehraj.to/... or search query"
           required
           aria-required="true"
         />
-        <button id="fetchBtn" type="submit" class="btn primary">Fetch &amp; Display</button>
+        <button id="fetchBtn" type="submit" class="btn primary">Go</button>
       </form>
-      <p class="hint">Paste a Prehraj.to / Prehrajto.cz URL and hit Enter or click the button.</p>
+      <p class="hint">Paste a Prehraj.to URL or type a search query and hit Enter.</p>
     </section>
 
-    <section id="resultsSection" class="card results-card hidden" aria-labelledby="results-title">
-      <div class="results-header">
-        <h2 id="results-title">Available Downloads</h2>
-        <button id="copyJsonBtn" class="btn ghost" title="Copy raw JSON">Copy JSON</button>
+    <!-- Search Results Grid -->
+    <section id="searchResultsSection" class="results-card hidden" aria-labelledby="search-title">
+      <h2 id="search-title">Search Results</h2>
+      <div id="resultsGrid" class="results-grid"></div>
+    </section>
+
+    <!-- Video Player View -->
+    <section id="playerSection" class="card hidden" aria-labelledby="player-title">
+      <div class="results-header" style="margin-bottom:1rem; display:flex; justify-content:space-between; align-items:center;">
+        <h2 id="player-title">Video Player</h2>
+        <div style="display:flex; gap:0.5rem;">
+          <select id="qualitySelect" class="quality-select" style="padding:0.5rem; background:var(--bg-2); color:var(--fg-0); border:1px solid var(--bg-2); border-radius:var(--radius);"></select>
+          <a id="downloadBtn" class="btn primary" style="padding:0.5rem 1rem; text-decoration:none; display:flex; align-items:center;" download target="_blank">Download</a>
+        </div>
+      </div>
+      <div class="video-container" style="width:100%; aspect-ratio:16/9; background:#000; border-radius:var(--radius); overflow:hidden;">
+        <video id="videoPlayer" controls autoplay style="width:100%; height:100%;"></video>
       </div>
 
-      <div class="table-wrapper">
-        <table id="resultTable" role="table" aria-label="Download links">
-          <thead>
-            <tr>
-              <th scope="col">Resolution</th>
-              <th scope="col">Download Link</th>
-              <th scope="col" class="actions-col">Actions</th>
-            </tr>
-          </thead>
-          <tbody id="resultBody"></tbody>
-        </table>
+      <div id="videoInfo" style="margin-top: 1rem; padding: 1rem; background: var(--bg-2); border-radius: var(--radius); display: flex; flex-wrap: wrap; gap: 1rem; font-size: 0.9rem; color: var(--fg-1);">
       </div>
     </section>
   </main>
@@ -73,6 +92,7 @@
     <p>© <span id="year"></span> PTDL • Built by <a href="https://github.com/LUKISO2">Lukas</a></p>
   </footer>
 
-  <script src="obfuscated.js"></script>
+  <!-- Replaced obfuscated.js with script.js to support new logic -->
+  <script src="script.js"></script>
 </body>
 </html>
