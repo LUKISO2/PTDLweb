@@ -32,16 +32,16 @@
       <div class="auth-dialog card">
         <h2>Enter Token</h2>
         <p>A valid token is required to perform searches.</p>
-        <div class="fetch-form" style="margin-top: 1rem;">
-          <input type="password" id="tokenInput" placeholder="Enter your token..." style="flex:1; padding:0.75rem; border-radius:var(--radius); border:1px solid var(--bg-2); background:var(--bg-2); color:var(--fg-0);"/>
-          <button id="saveTokenBtn" class="btn primary">Save Token</button>
+        <div class="fetch-form" style="margin-top: 1rem; flex-wrap: nowrap;">
+          <input type="password" id="tokenInput" placeholder="Enter your token..." style="flex:1; padding:0.75rem; border-radius:var(--radius); border:1px solid var(--bg-2); background:var(--bg-2); color:var(--fg-0); min-width: 0;"/>
+          <button id="saveTokenBtn" class="btn primary" style="white-space: nowrap;">Save</button>
         </div>
       </div>
     </div>
 
     <section class="card input-card" aria-labelledby="input-title">
       <h2 id="input-title">Get Links or Search</h2>
-      <form id="fetchForm" class="fetch-form" autocomplete="off">
+      <form id="fetchForm" class="input-group" autocomplete="off">
         <label for="urlInput" class="sr-only">Enter URL or Search Query</label>
         <input
           type="text"
@@ -51,7 +51,11 @@
           required
           aria-required="true"
         />
-        <button id="fetchBtn" type="submit" class="btn primary">Go</button>
+        <button id="fetchBtn" type="submit" class="btn primary icon-btn" aria-label="Search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+        </button>
       </form>
       <p class="hint">Paste a Prehraj.to URL or type a search query and hit Enter.</p>
     </section>
